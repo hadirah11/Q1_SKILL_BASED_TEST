@@ -1,0 +1,34 @@
+import socket
+
+def send_and_receive_data(host, port, data_to_send):
+    try:
+        # Create a socket object
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        # Connect to the server
+        client_socket.connect((host, port))
+        print(f"Connected to {host}:{port}")
+
+        # Send the data to the server
+        client_socket.sendall(data_to_send.encode())
+
+        # Receive the response from the server (adjust the buffer size as needed)
+        buffer_size = 1024
+        server_response = client_socket.recv(buffer_size).decode()
+        print(f"Server response: {server_response}")
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+    finally:
+        # Close the socket
+        client_socket.close()
+
+if __name__ == "__main__":
+    # Replace 'YOUR_STUDENT_ID' with your actual UiTM Student ID
+    student_id = "2021849774"
+
+    host = "izani.synology.me"
+    port = 8443
+
+    send_and_receive_data(host, port, student_id)
